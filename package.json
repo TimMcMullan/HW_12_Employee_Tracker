@@ -1,0 +1,29 @@
+{
+  "name": "hw_12_employee_tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimMcMullan/HW_12_Employee_Tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TimMcMullan/HW_12_Employee_Tracker/issues"
+  },
+  "homepage": "https://github.com/TimMcMullan/HW_12_Employee_Tracker#readme",
+  "dependencies": {
+    "mysql2": "^2.3.3",
+    "express": "^4.17.1",
+    "inquirer": "^8.2.2"
+  },
+  "devDependencies": {}
+}
