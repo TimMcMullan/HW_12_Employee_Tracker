@@ -64,6 +64,15 @@ const promptuser = () => {
               })
               .then(() => promptuser());;
             break;
+            case "ADD_DEPARTMENT": 
+            adddept();
+            // db.adddept().then(([rows]) => {
+            //     let employees = rows;
+            //     console.log("\n");
+            //     console.table(employees);
+            //   })
+            //   .then(() => promptuser());
+            break;
             case "ADD_EMPLOYEE": 
             db.XXXXXXXXX().then(([rows]) => {
                 let employees = rows;
@@ -99,29 +108,18 @@ const promptuser = () => {
 };
 
 promptuser();
-// SELECT role.title, role.role_id, department.dept_name, role.salaryFROM roleJOIN department ON role.department_id = department.dept_id;
-// then my function:
-// const findRoles = () => {
-//     db.query(`SELECT role.title, role.role_id, department.dept_name, role.salary
-//     FROM role
-//     JOIN department ON role.department_id = department.dept_id;`, function(err, results){
-//         console.table(results);
-//     }) ;
-// }
 
-// const params = [req.body.review, req.params.id];
-// db.query(findEmp, (err, result) => {
-//     if (err) {
-//         res.status(400).json({ error: err.message });
-//     } else if (!result.affectedRows) {
-//         res.json({
-//             message: 'Unexecutable'
-//         });
-//     } else {
-//         res.json({
-//             message: 'success',
-//             data: req.body
-//         });
-//         console.log(results);
-//     }
-// });
+const adddept = () => {
+    inquirer.prompt([
+        {
+        type: 'input',
+        name: 'adddept',
+        message: 'What is the name of the new department?'
+        }]).then(res => {
+            console.log(res);
+            db.addDepartment(res.adddept).then(promptuser => {
+                console.log(promptuser);
+                promptuser();
+            })
+        })
+    }
