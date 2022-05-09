@@ -7,28 +7,24 @@ class DB {
     }
     viewDepartments() {
         return this.connection.promise().query(
-            "SELECT `Dept Name` FROM department"
+            "SELECT dept_id AS 'Dept ID', dept_name AS Department FROM department"
         );
     }
     viewRoles() {
         return this.connection.promise().query(
-            "SELECT title, salary FROM role"
+            // Need to adjust schema so different roles are associated with different departments 
+            "SELECT title AS 'Job Title', salary AS salary, role_id AS 'Role ID' FROM role"
         );
     }
     viewEmployees() {
+        // Need to add manager
         return this.connection.promise().query(
-            "SELECT * FROM employee e LEFT JOIN role r ON(e.erole_id = r.role_id) LEFT JOIN department d ON(d.dept_id = r.department_id)"
+            "SELECT employee.employee_id AS ID, employee.first_name AS First, employee.last_name AS Last, role.title AS 'Job Title', department.dept_name AS 'Dept',role.salary AS 'Salary' FROM employee LEFT JOIN role ON (employee.erole_id = role.role_id) LEFT JOIN department ON(department.dept_id = role.department_id)"
         );
     }
     addDepartment(newdept) {
-        console.log("addDepartment function invoked");
-        console.log(newdept);
-        console.log(typeof newdept);
-        var query = `"INSERT INTO department (dept_name) VALUES (${newdept})"`
+        var query = `INSERT INTO department (dept_name) VALUES ("${newdept}")`
         return this.connection.promise().query(query
-            // "INSERT INTO department (dept_name) VALUES (" + newdept + ")"
-            // "INSERT INTO department SET ?", department
-            // "INSERT INTO department (dept_name) VALUES (')"
         );
     }
     viewManagers() {
@@ -41,15 +37,9 @@ class DB {
             "SELECT * FROM employee e LEFT JOIN role r ON(e.erole_id = r.role_id) LEFT JOIN department d ON(d.dept_id = r.department_id)"
         );
     }
-    removeEmployee() {
+    deleteEmployee (employee_id) {
         return this.connection.promise().query(
-            console.log("this is the end of functionality")
-            // "SELECT * FROM employee e LEFT JOIN role r ON(e.erole_id = r.role_id) LEFT JOIN department d ON(d.dept_id = r.department_id)"
-        );
-    }
-    updateEmployeeRole() {
-        return this.connection.promise().query(
-            "SELECT * FROM employee e LEFT JOIN role r ON(e.erole_id = r.role_id) LEFT JOIN department d ON(d.dept_id = r.department_id)"
+            "DELETE FROM employee WHERE employee_id =?",employee_id
         );
     }
     updateEmployeeManager() {
@@ -62,10 +52,12 @@ class DB {
             "SELECT * FROM employee e LEFT JOIN role r ON(e.erole_id = r.role_id) LEFT JOIN department d ON(d.dept_id = r.department_id)"
         );
     }
-    createRole() {
+    addNewRole() {
+        var query = `INSERT INTO role (title) VALUES ("${addNewRole.TITLE_VALUE})`
+        var query = `INSERT INTO role (salary) VALUES ("${addNewRole.SALARY})`
+        var query = `INSERT INTO role (department_id) VALUES ("${addRole.NEW_DEPT})`
         return this.connection.promise().query(
-            "SELECT * FROM employee e LEFT JOIN role r ON(e.erole_id = r.role_id) LEFT JOIN department d ON(d.dept_id = r.department_id)"
-        );
+         );
     }
     removeRole() {
         return this.connection.promise().query(
@@ -76,6 +68,11 @@ class DB {
         return this.connection.promise().query(
             "SELECT * FROM employee e LEFT JOIN role r ON(e.erole_id = r.role_id) LEFT JOIN department d ON(d.dept_id = r.department_id)"
         );
+    }
+    updateEmployeeRole(roleId, employeeId) {
+        return this.connection.promise().query(
+            "UPDATE employee SET erole_id = ? WHERE employee_id = ?", [roleId, employeeId]
+        )
     }
 }
 
