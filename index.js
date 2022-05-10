@@ -158,7 +158,7 @@ const addRole = () => {
         message: 'Enter the department where the new job will be assigned: ',
         value: 'NEW_DEPT'
     }]).then(res => {
-        db.addNewRole(res.addRole).then(() => {
+        db.addNewRole(res.newJobName, res.newJobSalary, res.deptOfNewRole).then(() => {
             console.log("New Role added");
             promptuser();
         })

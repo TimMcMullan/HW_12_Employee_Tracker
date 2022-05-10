@@ -52,12 +52,11 @@ class DB {
             "SELECT * FROM employee e LEFT JOIN role r ON(e.erole_id = r.role_id) LEFT JOIN department d ON(d.dept_id = r.department_id)"
         );
     }
-    addNewRole() {
-        var query = `INSERT INTO role (title) VALUES ("${addNewRole.TITLE_VALUE})`
-        var query = `INSERT INTO role (salary) VALUES ("${addNewRole.SALARY})`
-        var query = `INSERT INTO role (department_id) VALUES ("${addRole.NEW_DEPT})`
-        return this.connection.promise().query(
-         );
+    addNewRole(newJobName, newJobSalary, deptOfNewRole) {
+            var query = `INSERT INTO role (title, salary, department_id) VALUES ("${newJobName}","${newJobSalary}","${deptOfNewRole}")`;
+            console.log(query);
+            return this.connection.promise().query(query
+            );
     }
     removeRole() {
         return this.connection.promise().query(
