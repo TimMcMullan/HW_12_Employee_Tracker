@@ -23,6 +23,7 @@ CREATE TABLE employee (
     last_name VARCHAR(100) NOT NULL,
     erole_id INT NOT NULL,
     manager_id INT NOT NULL,
+    e_manager VARCHAR(100) NOT NULL,
     FOREIGN KEY(erole_id)
     REFERENCES role(role_id)
 );

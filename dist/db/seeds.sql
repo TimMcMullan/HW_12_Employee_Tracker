@@ -8,15 +8,17 @@ VALUES
     ("Sales", 5);
 
 INSERT INTO 
-    role (title, salary, department_id)
+    role (title, salary, department_id, e_role)
 VALUES  
     ("Padawan", 40000, 1),
+    ("Apprentice", 35000, 2),
     ("Hinchman", 60000, 2),
-    ("OG", 80000, 3),
-    ("KingPen", 85000, 4);
+    ("Journeyman", 55000, 1),
+    ("OG", 80000, 1),
+    ("KingPen", 85000, 2);
 
 INSERT INTO 
-    employee (first_name, last_name, erole_id)
+    employee (first_name, last_name, erole_id, e_manager)
 VALUES
     ("Darth", "Vader", 3),
     ("The", "Joker", 1),
@@ -28,10 +30,7 @@ VALUES
     ("Tyler", "Durden", 4),
     ("Norman", "Bates", 3),
     ("Michael", "Myers", 2),
-    ("Freddy", "Krueger", 1);
-
--- INSERT INTO
---     manager (first_name, last_name, mdept_id)
--- VALUES
---     ("Hans", "Landa", 4),
---     ("Tyler", "Durden", 5),
+    ("Freddy", "Krueger", 1)
+    -- **TM - keep for future useII
+    -- ON DUPLICATE KEY UPDATE
+    --     employee_id=VALUES(first_name, last_name, erole_id, e_manager)

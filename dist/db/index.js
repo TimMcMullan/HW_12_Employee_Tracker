@@ -19,7 +19,7 @@ class DB {
     viewEmployees() {
         // Need to add manager
         return this.connection.promise().query(
-            "SELECT employee.employee_id AS ID, employee.first_name AS First, employee.last_name AS Last, role.title AS 'Job Title', department.dept_name AS 'Dept',role.salary AS 'Salary' FROM employee LEFT JOIN role ON (employee.erole_id = role.role_id) LEFT JOIN department ON(department.dept_id = role.department_id)"
+            "SELECT employee.employee_id AS ID, employee.first_name AS First, employee.last_name AS Last, role.title AS 'Job Title', department.dept_name AS 'Dept', employee.e_manager AS 'Mgr', role.salary AS 'Salary' FROM employee LEFT JOIN role ON (employee.erole_id = role.role_id) LEFT JOIN department ON(department.dept_id = role.department_id)"
         );
     }
     addDepartment(newdept) {
@@ -29,7 +29,7 @@ class DB {
     }
     viewManagers() {
         return this.connection.promise().query(
-            "SELECT dept_id, first_name, last_name, FROM role WHERE dept_id = 4"
+            "SELECT dept_name, first_name, last_name, e-manager, FROM role WHERE dept_id = 4"
         );
     }
     createEmployee() {
